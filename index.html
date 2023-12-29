@@ -1,0 +1,76 @@
+<!-- comments for revision in case required in future -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Generate a <br><span>Random Password</span></h1>
+        <div class="display">
+            <input type="text" id="password" placeholder="Password">
+            <img src="images/copy2.png" onclick="copyPassword()">
+        </div>
+        <button onclick = "createPassword()"><img src="images/generate2.png">Generate Password</button>
+    </div>
+    <script>
+        const passwordBox = document.getElementById("password");
+        const length = 12;
+
+        const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+        const number = "0123456789";
+        const symbol = "!@#$%^&*(_-+={/)<|[~>";
+
+        const allChars = upperCase+lowerCase+number+symbol;
+
+
+        function createPassword(){
+            let password = "";
+            password += upperCase[Math.floor(Math.random() * upperCase.length)];
+            // The expression (Math.random() * upperCase.length) is used in JavaScript to generate a random number between 0 (inclusive) and a maximum value that is determined by the length of the upperCase 
+            
+            // if can't understand run console.log(Math.random()*upperCase.length) into the console of browser 
+            
+            // Math.random(): This is a JavaScript function that generates a random floating-point number between 0 (inclusive) and 1 (exclusive).
+
+            // Math.floor(): This function is used to round down the result of the Math.random() function to the nearest integer. It effectively converts the random number into an integer index.
+
+            password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+
+            password += number[Math.floor(Math.random() * number.length)];
+
+            password += symbol[Math.floor(Math.random() * symbol.length)];
+
+
+            while(length > password.length){
+                password += allChars[Math.floor(Math.random() * allChars.length)];
+
+            }
+            passwordBox.value = password;
+        }
+
+
+        function copyPassword(){
+            passwordBox.select();
+            document.execCommand("copy");
+
+        //passwordBox.select();: This line of code selects the text inside an HTML input or textarea element with the id "passwordBox." The select() method is used to highlight the text content within the element, making it ready for copying.
+
+        // document.execCommand("copy");: This line of code uses the execCommand method on the document object to execute the "copy" command. The "copy" command is used to copy the selected text to the clipboard.
+        
+    }
+
+// Here's a step-by-step explanation of how this function works:
+
+// When the copyPassword() function is called, it first selects the text within the input or textarea element with the id "passwordBox." This is done by calling passwordBox.select(), where passwordBox is expected to be a reference to the HTML input or textarea element with the id "passwordBox."
+
+// After the text is selected, the execCommand("copy") method is called on the document object. This command instructs the browser to copy the selected text to the clipboard.
+    </script>
+</body>
+</html>
